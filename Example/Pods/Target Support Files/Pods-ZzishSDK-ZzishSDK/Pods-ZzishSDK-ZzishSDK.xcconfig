@@ -1,0 +1,1 @@
+PODS_ZZISHSDK_ZZISHSDK_OTHER_LDFLAGS = -l"sqlite3" -framework "CFNetwork" -framework "SystemConfiguration"

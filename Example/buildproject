@@ -1,0 +1,1 @@
+xcodebuild -workspace ZzishSDK.xcworkspace -scheme ZzishSDK-cal -destination platform='iOS Simulator',OS=8.1,name='iPad Retina' -xcconfig ../temp.xcconfig

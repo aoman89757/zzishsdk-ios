@@ -1,0 +1,1 @@
+OTHER_LDFLAGS = $(OTHER_LDFLAGS) -l"Pods-ZzishSDK-JSONModel" -l"Pods-ZzishSDK-Reachability"  -l"sqlite3" -framework "SystemConfiguration" -force_load "$(SRCROOT)/calabash.framework/calabash" -lstdc++

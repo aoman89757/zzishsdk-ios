@@ -1,0 +1,8 @@
+server_version['version']
+Calabash::Cucumber::FRAMEWORK_VERSION
+exit
+server_version
+server_version
+exit
+start_test_server_in_background
+exit

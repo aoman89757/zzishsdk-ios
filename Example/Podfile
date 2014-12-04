@@ -2,10 +2,18 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'ZzishSDK', :exclusive => true do
   pod "ZzishSDK", :path => "../"
+  pod "Reachability"
+  pod "JSONModel"
 end
 
 target 'Tests', :exclusive => true do
   pod "ZzishSDK", :path => "../"
+  pod "Reachability"
+  pod "JSONModel"    
+end
 
-  
+target 'ZzishSDK-cal', :exclusive => false do
+    pod 'Calabash', '>= 0.9.126'
+    pod "Reachability"
+    pod "JSONModel"
 end
