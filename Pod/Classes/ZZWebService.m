@@ -61,7 +61,7 @@
     // You can parse the stuff in your instance variable now
     NSError *e;
     NSDictionary *object = [NSJSONSerialization JSONObjectWithData:_responseData options:kNilOptions error:&e];
-    NSLog(@"Response %@",OZZobject);
+    NSLog(@"Response %@",object);
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

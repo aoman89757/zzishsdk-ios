@@ -20,7 +20,7 @@ it, simply add the following line to your Podfile:
 
 ## Author
 
-Samir Seetal, sseetal@gmail.com
+Samir Seetal, samir@zzish.com
 
 ## License
 
