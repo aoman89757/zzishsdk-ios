@@ -7,37 +7,67 @@
 //
 
 #import "ZZService.h"
-#import "Reachability.h"
-#import "sqlite3.h"
+#import "PropertyService.h"
+#import "ZZWebService.h"
 
 @implementation ZZService
 
-static sqlite3 *database;
-
-+ (NSString* ) databasePath {
-    NSString *docsDir;
-    NSArray *dirPaths;
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    return [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"ZZISHDB"]];
-}
-
-+ (const char*) databasename {
-    return [[self databasePath] UTF8String];
-}
-
-+ (void)open {
-    if (sqlite3_open([self databasename], &database) != SQLITE_OK) {
-        NSLog(@"Failed to open database! %s", sqlite3_errmsg(database));
++ (void)initWithApplicationId:(NSString *)applicationId {
+    if (![PropertyService deviceId]) {
+        [PropertyService setDeviceId:[[NSUUID UUID] UUIDString]];
     }
-    NSLog(@"YES");
+    [PropertyService setAppToken:applicationId];
 }
 
-+ (BOOL)connected {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return networkStatus != NotReachable;
++ (ZZUser *)user:(NSString *)uuid {
+    NSString* currentUserId = [PropertyService userId];
+    if (!currentUserId || ![uuid isEqualToString:currentUserId]) {
+        //userId is new or changed
+        [PropertyService setSessionId:[[NSUUID UUID] UUIDString]];
+    }
+    [PropertyService setUserId:uuid];
+    ZZUser* user = [[ZZUser alloc] init];
+    user.uuid = uuid;
+    return user;
+}
+
++ (void)sendMessage:(ZZUser *)userModel withActivivity:(ZZActivity *)activityModel forVerb:(NSString *)verbName withAction:(ZZAction*)actionModel {
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+    dictionary[@"id"] = activityModel.uuid;
+    dictionary[@"actor"] = [userModel tincan];
+    
+    NSMutableDictionary *verb = [NSMutableDictionary new];
+    verb[@"id"] = verbName;
+    dictionary[@"verb"] = verb;
+    
+    dictionary[@"object"] = [activityModel tincan];
+
+    if (actionModel) {
+        dictionary[@"actions"] = @[[actionModel tincan]];
+    }
+    NSError *error;
+    NSData *jsonOutputData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                             options:NSJSONWritingPrettyPrinted
+                                                               error:&error];
+
+    NSMutableDictionary *context = [NSMutableDictionary new];
+    NSMutableDictionary *extensions = [NSMutableDictionary new];
+    if (userModel.groupCode) {
+        extensions[@"http://www.zzish.com/context/extension/groupCode"]=userModel.groupCode;
+    }
+    if ([PropertyService deviceId]) {
+        extensions[@"http://www.zzish.com/context/extension/deviceId"]=[PropertyService deviceId];
+    }
+    if ([PropertyService sessionId]) {
+        extensions[@"http://www.zzish.com/context/extension/sessionId"]=[PropertyService sessionId];
+    }
+    context[@"extensions"] = extensions;
+    dictionary[@"context"] = context;
+    
+    //set json string to body data
+    NSString *jsonOutputString = [[NSString alloc] initWithData:jsonOutputData encoding:NSUTF8StringEncoding];
+    NSLog(@"Sending %@",jsonOutputString);
+    [[[ZZWebService alloc] init] upload:@"statements" withJSON:jsonOutputString];
 }
 
 @end

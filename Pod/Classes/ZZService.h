@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSONModel.h"
+#import "ZZUser.h"
+#import "ZZActivity.h"
+#import "ZZAction.h"
 
-@interface ZZService : JSONModel
+@interface ZZService : NSObject
 
-+ (BOOL)connected;
-+ (void)open;
++ (void)initWithApplicationId:(NSString *)applicationId;
++ (ZZUser *)user:(NSString *)user;
++ (void)sendMessage:(ZZUser *)user withActivivity:(ZZActivity *)activity forVerb:(NSString *)verbName withAction:(ZZAction*)action;
+
 
 @end

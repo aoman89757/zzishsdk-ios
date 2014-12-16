@@ -11,8 +11,10 @@
 #import "ZZService.h"
 
 //Models
-#import "ZZ
+#import "ZZUser.h"
 
 @interface ZzishSDK : NSObject
+
++ (BOOL)connected;
 
 @end

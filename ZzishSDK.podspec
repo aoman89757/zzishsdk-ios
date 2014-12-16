@@ -10,19 +10,17 @@
 Pod::Spec.new do |s|
   s.name             = "ZzishSDK"
   s.version          = "0.1.0"
-  s.summary          = "A short description of ZzishSDK."
+  s.summary          = "Wrapper for Zzish REST API"
   s.description      = <<-DESC
-                       An optional longer description of ZzishSDK
+                       A store and forward wrapper for creating activities/actions on the Zzish Platform
 
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/ZzishSDK"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://www.zzish.com"
   s.license          = 'MIT'
-  s.author           = { "Samir Seetal" => "sseetal@gmail.com" }
+  s.author           = { "Samir Seetal" => "samir@zzish.com" }
   s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/ZzishSDK.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true

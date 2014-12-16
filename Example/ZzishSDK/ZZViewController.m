@@ -10,7 +10,13 @@
 #import <ZzishSDK/ZzishSDK.h>
 
 @interface ZZViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *label4;
+
+@property (weak, nonatomic) IBOutlet UITextField *input;
+@property (weak, nonatomic) IBOutlet UILabel *outputCode;
+
+@property (strong,nonatomic) ZZUser* user;
+@property (strong,nonatomic) ZZActivity* activity;
+@property (strong,nonatomic) ZZAction* action;
 
 @end
 
@@ -19,9 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"Are you connected %d",[ZZService connected]);
-    ZZUser* user = [ZZUser instance];
-	// Do any additional setup after loading the view, typically from a nib.
+    [ZZService initWithApplicationId:@"12346"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,8 +33,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)buttonClicked:(id)sender {
-    self.label4.text = @"Hello";
+- (IBAction)createUser:(id)sender {
+    self.user = [ZZService user:self.input.text];
 }
+- (IBAction)createActivity:(id)sender {
+    self.activity = [self.user createActivity:self.input.text];
+    [self.activity start];
+}
+
+- (IBAction)createAction:(id)sender {
+    self.action = [self.activity createAction:
+                   self.input.text];
+    [self.action score:100];
+    [self.action save];
+}
+
+- (IBAction)createGroupUser:(id)sender {
+    self.user = [ZZService user:[[NSUUID UUID] UUIDString]];
+    self.user.groupCode = self.input.text;
+}
+
+- (IBAction)stopActivity:(id)sender {
+    [self.activity stop];
+}
+
+- (IBAction)cancelActivity:(id)sender {
+    [self.activity cancel];
+}
+
+
+
 
 @end
