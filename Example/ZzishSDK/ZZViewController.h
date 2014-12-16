@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ZzishSDK/ZzishSDK.h>
 
-@interface ZZViewController : UIViewController
+@interface ZZViewController : UIViewController <ZZCallbackDelegate>
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "ZZViewController.h"
-#import <ZzishSDK/ZzishSDK.h>
+
 
 @interface ZZViewController ()
 
@@ -20,12 +20,13 @@
 
 @end
 
-@implementation ZZViewController
+@implementation ZZViewController 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [ZZService initWithApplicationId:@"12346"];
+    [Zzish initWithApplicationId:@"12346"];
+    [Zzish delegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,7 +35,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)createUser:(id)sender {
-    self.user = [ZZService user:self.input.text];
+    self.user = [Zzish user:self.input.text];
 }
 - (IBAction)createActivity:(id)sender {
     self.activity = [self.user createActivity:self.input.text];
@@ -49,7 +50,7 @@
 }
 
 - (IBAction)createGroupUser:(id)sender {
-    self.user = [ZZService user:[[NSUUID UUID] UUIDString]];
+    self.user = [Zzish user:[[NSUUID UUID] UUIDString]];
     self.user.groupCode = self.input.text;
 }
 
@@ -59,6 +60,10 @@
 
 - (IBAction)cancelActivity:(id)sender {
     [self.activity cancel];
+}
+
+- (void)processZzishResponse:(NSDictionary *)response {
+    
 }
 
 
