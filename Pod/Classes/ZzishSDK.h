@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 //Controllers
-#import "ZZService.h"
+#import "Zzish.h"
+#import "ZZWebService.h"
 
 //Models
 #import "ZZUser.h"

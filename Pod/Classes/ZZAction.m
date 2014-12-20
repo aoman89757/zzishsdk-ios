@@ -8,9 +8,10 @@
 
 #import "ZZAction.h"
 #import "ZZActivity.h"
-#import "ZZService.h"
+#import "Zzish.h"
 
 @interface ZZAction()
+
 
 @property (strong,nonatomic) NSNumber* score;
 @property (strong,nonatomic) NSNumber* duration;
@@ -37,23 +38,32 @@
 }
 
 - (ZZAction *)attempts:(int)attempts {
-    self.correct = [NSNumber numberWithInt:attempts];
+    self.attempts = [NSNumber numberWithInt:attempts];
+    return self;
+}
+
+- (ZZAction *)response:(NSString*)response {
+    self.response = response;
     return self;
 }
 
 - (void)save {
-    [ZZService sendMessage:self.activity.user withActivivity:self.activity forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:self];
+    [Zzish sendMessage:self.activity.user withActivivity:self.activity forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:self];
 }
 
 - (NSDictionary *)tincan {
     NSMutableDictionary *action = [NSMutableDictionary new];
     if (self.score) action[@"score"] = self.score;
     if (self.duration) action[@"duration"] = self.duration;
-    if (self.correct) action[@"correct"] = [NSString stringWithFormat:@"%@",self.correct];
-    if (self.attempts) action[@"attempts"] = [NSString stringWithFormat:@"%@",self.attempts];
+    if (self.correct) {
+        int x = [self.correct intValue];
+        action[@"correct"] = x==1?@"true":@"false";
+    }
+    if (self.attempts) action[@"attempts"] = self.attempts;
+    if (self.response) action[@"response"] = self.response;
     
     NSMutableDictionary *actionDefinition = [NSMutableDictionary new];
-    actionDefinition[@"name"] = self.name;
+    actionDefinition[@"type"] = self.name;
     action[@"definition"] = actionDefinition;
     action[@"uuid"] = self.uuid;
     

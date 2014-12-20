@@ -6,10 +6,10 @@
 //
 //
 
-#import "PropertyService.h"
+#import "ZZPropertyService.h"
 
 
-@implementation PropertyService
+@implementation ZZPropertyService
 
 #define PREF_FILE_NAME @"ZZISHPREFERENCES"
 

@@ -10,12 +10,24 @@
 #import "ZZUser.h"
 #import "ZZActivity.h"
 #import "ZZAction.h"
+#import "ZZWebService.h"
 
-@interface ZZService : NSObject
+@protocol ZZCallbackDelegate <NSObject>
+@required
+- (void) processZzishResponse:(int)status andMessage:(NSString *)message;
+@end
+
+@interface Zzish : NSObject<ZZWebCallbackDelegate>
+{
+    id <ZZCallbackDelegate> delegate;
+}
+
+@property (retain) id delegate;
 
 + (void)initWithApplicationId:(NSString *)applicationId;
 + (ZZUser *)user:(NSString *)user;
 + (void)sendMessage:(ZZUser *)user withActivivity:(ZZActivity *)activity forVerb:(NSString *)verbName withAction:(ZZAction*)action;
++ (void)delegate:(id)delegate;
 
 
 @end

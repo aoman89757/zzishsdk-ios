@@ -6,19 +6,19 @@
 //
 //
 
-#import "FileService.h"
+#import "ZZFileService.h"
 
-@implementation FileService
+@implementation ZZFileService
 
 + (NSString *) fileName {
     return nil;
 }
 
-+ (NSString *)data:(NSString *)key {
++ (id)data:(NSString *)key {
     return [[NSDictionary dictionaryWithContentsOfFile:[self filePath]] valueForKey:key];
 }
 
-+ (void)setData:(NSString *)key withValue:(NSString*) value {
++ (void)setData:(NSString *)key withValue:(id) value {
     if (value) {
         NSMutableDictionary* dict = [self dictionary];
         [dict setValue:value forKey:key];
@@ -29,11 +29,13 @@
     }
 }
 
-+ (void)removeDataForKey:(NSString *)key
++ (NSString *)removeDataForKey:(NSString *)key
 {
     NSMutableDictionary *dict = [self dictionary];
+    NSString* value = dict[key];
     [dict removeObjectForKey:key];
     [self savePropertyList:dict];
+    return value;
 }
 
 /*!

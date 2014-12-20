@@ -17,10 +17,10 @@ Pod::Spec.new do |s|
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
-  s.homepage         = "https://www.zzish.com"
+  s.homepage         = "http://www.zzish.com"
   s.license          = 'MIT'
   s.author           = { "Samir Seetal" => "samir@zzish.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/ZzishSDK.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/zzishdev/zzishsdk-ios.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true

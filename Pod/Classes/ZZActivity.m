@@ -8,20 +8,20 @@
 
 #import "ZZActivity.h"
 #import "ZZUser.h"
-#import "ZZService.h"
+#import "Zzish.h"
 
 @implementation ZZActivity
 
 - (void)start {
-    [ZZService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:nil];
+    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:nil];
 }
 
 - (void)stop {
-    [ZZService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/complete" withAction:nil];
+    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/complete" withAction:nil];
 }
 
 - (void)cancel {
-    [ZZService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/cancel" withAction:nil];
+    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/cancel" withAction:nil];
 }
 
 - (ZZAction *)createAction:(NSString *)name {

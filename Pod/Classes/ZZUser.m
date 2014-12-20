@@ -8,7 +8,7 @@
 
 #import "ZZUser.h"
 #import "ZzishSDK.h"
-#import "PropertyService.h"
+#import "ZZPropertyService.h"
 
 @implementation ZZUser
 
@@ -27,7 +27,7 @@
     }
     
     NSMutableDictionary *account = [NSMutableDictionary new];
-    account[@"homePage"] = [NSString stringWithFormat:@"http://www.zzish.com/%@",[PropertyService appToken]];
+    account[@"homePage"] = [NSString stringWithFormat:@"http://www.zzish.com/%@",[ZZPropertyService appToken]];
     account[@"name"] = self.uuid;
     actor[@"account"] = account;
     return actor;

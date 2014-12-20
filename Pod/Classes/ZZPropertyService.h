@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FileService.h"
+#import "ZZFileService.h"
 
-@interface PropertyService : FileService
+@interface ZZPropertyService : ZZFileService
 
 /*!
  * @discussion Sets the app token in preference file

@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "ZZObject.h"
-#import "FileService.h"
+#import "ZZFileService.h"
 
-@interface ZZDataService : FileService
+@interface ZZDataService : ZZFileService
 
-+ (void)save:(ZZObject *)model;
++ (NSString *)save:(ZZObject *)model;
 
 + (ZZObject *)get:(NSString *)uuid;
 

@@ -7,9 +7,10 @@
 //
 
 #import "ZZWebService.h"
-#import "PropertyService.h"
+#import "ZZPropertyService.h"
 
-#define BASE_URL @"http://localhost:8080/zzishapi/api/"
+
+#define BASE_URL @"http://api.zzish.co.uk/api/"
 
 @interface ZZWebService()
 
@@ -18,6 +19,8 @@
 @end
 
 @implementation ZZWebService
+
+@synthesize delegate;
 
 - (void)upload:(NSString *)endpoint withJSON:(NSString*)json {
     // Create the request.
@@ -28,7 +31,7 @@
     
     // This is how we set header fields
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    NSString* token = [PropertyService appToken];
+    NSString* token = [ZZPropertyService appToken];
     [request addValue:token forHTTPHeaderField:@"X-ApplicationId"];
     
     // Convert your data and set your request's HTTPBody property
@@ -61,7 +64,7 @@
     // You can parse the stuff in your instance variable now
     NSError *e;
     NSDictionary *object = [NSJSONSerialization JSONObjectWithData:_responseData options:kNilOptions error:&e];
-    NSLog(@"Response %@",object);
+    [self.delegate process:object];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

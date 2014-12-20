@@ -68,6 +68,7 @@ static sqlite3 *database;
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
+//    return NO;
 }
 
 @end

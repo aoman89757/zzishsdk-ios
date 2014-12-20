@@ -9,7 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "ZZCallback.h"
 
+@protocol ZZWebCallbackDelegate <NSObject>
+@required
+- (void) process: (NSDictionary *)response;
+@end
+
+
 @interface ZZWebService : NSObject<NSURLConnectionDelegate>
+{
+    id <ZZWebCallbackDelegate> delegate;
+}
+
+@property (retain) id delegate;
 
 - (void)upload:(NSString *)endpoint withJSON:(NSString*)json;
 
@@ -24,3 +35,4 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 
 @end
+
