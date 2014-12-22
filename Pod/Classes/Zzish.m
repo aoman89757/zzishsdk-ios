@@ -25,7 +25,7 @@
 static Zzish *instance;
 static dispatch_once_t predicate = 0;
 
-+ (void)initWithApplicationId:(NSString *)applicationId {
++ (void)startWithApplicationId:(NSString *)applicationId {
     if (!instance) {
         predicate = 0;
         dispatch_once(&predicate, ^{

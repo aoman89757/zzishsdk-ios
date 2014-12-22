@@ -43,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [Zzish initWithApplicationId:@"868b8768-c031-434c-b4f6-69e8f39dd5bf"];
+    [Zzish startWithApplicationId:@"868b8768-c031-434c-b4f6-69e8f39dd5bf"];
     [Zzish delegate:self];
 }
 

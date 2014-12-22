@@ -24,7 +24,7 @@
 
 @property (retain) id delegate;
 
-+ (void)initWithApplicationId:(NSString *)applicationId;
++ (void)startWithApplicationId:(NSString *)applicationId;
 + (ZZUser *)user:(NSString *)user;
 + (void)sendMessage:(ZZUser *)user withActivivity:(ZZActivity *)activity forVerb:(NSString *)verbName withAction:(ZZAction*)action;
 + (void)delegate:(id)delegate;
