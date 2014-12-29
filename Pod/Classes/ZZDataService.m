@@ -18,7 +18,7 @@
     NSError* error;
     NSMutableDictionary* overall = [NSMutableDictionary new];
     overall[CLASS_NAME] = NSStringFromClass ([model class]);
-    overall[OBJECT_VALUE] = [model toDictionary];
+    //overall[OBJECT_VALUE] = [model toDictionary];
     NSData *jsonOutputData = [NSJSONSerialization dataWithJSONObject:overall
                                                              options:NSJSONWritingPrettyPrinted
                                                                error:&error];

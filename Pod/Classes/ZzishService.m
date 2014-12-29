@@ -6,23 +6,23 @@
 //
 //
 
-#import "Zzish.h"
+#import "ZzishService.h"
 #import "ZZPropertyService.h"
 #import "ZZWebService.h"
 #import "ZzishSDK.h"
 #import "ZZJsonService.h"
 
-@interface Zzish()
+@interface ZzishService()
 
 @property (strong,nonatomic) ZZWebService* wservice;
 
 @end
 
-@implementation Zzish
+@implementation ZzishService
 
 @synthesize delegate;
 
-static Zzish *instance;
+static ZzishService *instance;
 static dispatch_once_t predicate = 0;
 
 + (void)startWithApplicationId:(NSString *)applicationId {
@@ -42,19 +42,21 @@ static dispatch_once_t predicate = 0;
     }
 }
 
-+ (ZZUser *)user:(NSString *)uuid {
++ (ZzishUser *)user:(NSString *)uuid {
     NSString* currentUserId = [ZZPropertyService userId];
     if (!currentUserId || ![uuid isEqualToString:currentUserId]) {
         //userId is new or changed
         [ZZPropertyService setSessionId:[[NSUUID UUID] UUIDString]];
     }
     [ZZPropertyService setUserId:uuid];
-    ZZUser* user = [[ZZUser alloc] init];
+    NSString* uid = [ZZPropertyService userId];
+    NSLog(@"I saved %@",uid);
+    ZzishUser* user = [[ZzishUser alloc] init];
     user.uuid = uuid;
     return user;
 }
 
-+ (void)sendMessage:(ZZUser *)userModel withActivivity:(ZZActivity *)activityModel forVerb:(NSString *)verbName withAction:(ZZAction*)actionModel {
++ (void)sendMessage:(ZzishUser *)userModel withActivivity:(ZzishActivity *)activityModel forVerb:(NSString *)verbName withAction:(ZzishAction*)actionModel {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     dictionary[@"id"] = activityModel.uuid;
     dictionary[@"actor"] = [userModel tincan];

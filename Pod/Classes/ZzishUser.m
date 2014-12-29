@@ -6,14 +6,26 @@
 //
 //
 
-#import "ZZUser.h"
+#import "ZzishUser.h"
 #import "ZzishSDK.h"
 #import "ZZPropertyService.h"
 
-@implementation ZZUser
+@implementation ZzishUser
 
-- (ZZActivity *) createActivity:(NSString *)name {
-    ZZActivity* activity = [[ZZActivity alloc] init];
+
++ (ZzishUser *) currentUser {
+    NSString* currentUserId = [ZZPropertyService userId];
+    if (currentUserId) {
+        //userId is new or changed
+        ZzishUser* user = [[ZzishUser alloc] init];
+        user.uuid = currentUserId;
+        return user;
+    }
+    return nil;
+}
+
+- (ZzishActivity *) createActivity:(NSString *)name {
+    ZzishActivity* activity = [[ZzishActivity alloc] init];
     activity.uuid = [[NSUUID UUID] UUIDString];
     activity.name = name;
     activity.user = self;

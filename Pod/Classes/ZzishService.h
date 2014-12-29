@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZZUser.h"
-#import "ZZActivity.h"
-#import "ZZAction.h"
+#import "ZzishUser.h"
+#import "ZzishActivity.h"
+#import "ZzishAction.h"
 #import "ZZWebService.h"
 
 @protocol ZZCallbackDelegate <NSObject>
@@ -17,7 +17,7 @@
 - (void) processZzishResponse:(int)status andMessage:(NSString *)message;
 @end
 
-@interface Zzish : NSObject<ZZWebCallbackDelegate>
+@interface ZzishService : NSObject<ZZWebCallbackDelegate>
 {
     id <ZZCallbackDelegate> delegate;
 }
@@ -25,8 +25,8 @@
 @property (retain) id delegate;
 
 + (void)startWithApplicationId:(NSString *)applicationId;
-+ (ZZUser *)user:(NSString *)user;
-+ (void)sendMessage:(ZZUser *)user withActivivity:(ZZActivity *)activity forVerb:(NSString *)verbName withAction:(ZZAction*)action;
++ (ZzishUser *)user:(NSString *)user;
++ (void)sendMessage:(ZzishUser *)user withActivivity:(ZzishActivity *)activity forVerb:(NSString *)verbName withAction:(ZzishAction*)action;
 + (void)delegate:(id)delegate;
 
 
