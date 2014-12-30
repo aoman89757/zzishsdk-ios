@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "ZzishSDK"
-  s.version          = "0.2.2"
+  s.version          = "0.2.3"
   s.summary          = "Wrapper for Zzish REST API"
   s.description      = <<-DESC
                        A store and forward wrapper for creating activities/actions on the Zzish Platform
