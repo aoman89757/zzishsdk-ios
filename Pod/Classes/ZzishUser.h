@@ -14,8 +14,6 @@
 
 @property (strong, nonatomic) NSString* name;
 
-@property (strong, nonatomic) NSString* groupCode;
-
 /*!
  * @discussion Returns the current user
  * @return the current User (or nill) if never set

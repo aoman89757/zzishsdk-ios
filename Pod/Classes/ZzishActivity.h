@@ -14,6 +14,7 @@
 @interface ZzishActivity : ZZObject
 
 @property (strong, nonatomic) NSString* name;
+@property (strong, nonatomic) NSString* groupCode;
 @property (strong, nonatomic) ZzishUser* user;
 
 /*!

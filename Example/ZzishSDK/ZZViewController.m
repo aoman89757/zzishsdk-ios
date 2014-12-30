@@ -55,12 +55,12 @@
 - (IBAction)createUser:(id)sender {
     self.user = [Zzish user:self.userId.text];
     self.user.name = self.name.text;
-    self.user.groupCode = self.groupCode.text;
     NSLog(@"Created user");
 }
 
 - (IBAction)createActivity:(id)sender {
     self.activity = [self.user createActivity:self.activityName.text];
+    self.activity.groupCode = self.groupCode.text;
     [self.activity start];
     NSLog(@"Started Activity");
 }

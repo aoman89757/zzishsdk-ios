@@ -9,25 +9,28 @@
 #import <Foundation/Foundation.h>
 #import "ZZFileService.h"
 
+#define ENDPOINT_PARAM @"endpoint"
+#define DATA_PARAM @"data"
+
 @interface ZZJsonService : ZZFileService
 
 /*!
- * @discussion Returns the next value to submit to web service. nil if there is nothi
- * @return returns nil if nothing exists or a string in dictionary
+ * @discussion Returns the next JSON Dictionary (with data and endpoint) to submit to web service. nil if there is nothing
+ * @return returns nil if nothing exists or a JSON Dictionary (with data and endpoint)
  */
-+ (NSString *)next;
++ (NSDictionary *)next;
 
 /*!
- * @discussion Saves a JSON string at the end of the list
- * @param json the JSON string to save
+ * @discussion Saves a JSON Dictionary (with data and endpoint) at the end of the list
+ * @param json the JSON Dictionary (with data and endpoint) to save
  */
-+ (NSString *)saveRequest:(NSString *)json andReturn:(BOOL)returnFirst;
++ (NSDictionary *)saveRequest:(NSDictionary *)json andReturn:(BOOL)returnFirst;
 
 /*!
- * @discussion Inserts a JSON string at the begnning
- * @param json the JSON string to save
+ * @discussion Inserts a JSON Dictionary (with data and endpoint) at the begnning
+ * @param json the JSON JSON Dictionary (with data and endpoint) to save
  */
-+ (void)buffer:(NSString *)json;
++ (void)buffer:(NSDictionary *)json;
 
 
 @end

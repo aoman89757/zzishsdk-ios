@@ -26,8 +26,9 @@
 
 + (void)startWithApplicationId:(NSString *)applicationId;
 + (ZzishUser *)user:(NSString *)user;
-+ (void)sendMessage:(ZzishUser *)user withActivivity:(ZzishActivity *)activity forVerb:(NSString *)verbName withAction:(ZzishAction*)action;
 + (void)delegate:(id)delegate;
 
++ (void)saveUser:(ZzishUser*)user;
++ (void)sendMessage:(ZzishUser *)user withActivivity:(ZzishActivity *)activity forVerb:(NSString *)verbName withAction:(ZzishAction*)action;
 
 @end

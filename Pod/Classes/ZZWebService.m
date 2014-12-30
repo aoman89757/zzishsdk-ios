@@ -8,6 +8,7 @@
 
 #import "ZZWebService.h"
 #import "ZZPropertyService.h"
+#import "ZZJsonService.h"
 
 
 #define BASE_URL @"http://api.zzish.co.uk/api/"
@@ -21,6 +22,12 @@
 @implementation ZZWebService
 
 @synthesize delegate;
+
+- (void)upload:(NSDictionary*)command {
+    NSString* endpoint = command[ENDPOINT_PARAM];
+    NSString* data =     command[DATA_PARAM];
+    [self upload:endpoint withJSON:data];
+}
 
 - (void)upload:(NSString *)endpoint withJSON:(NSString*)json {
     // Create the request.

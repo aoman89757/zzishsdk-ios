@@ -12,6 +12,12 @@
 
 @implementation ZzishUser
 
+/*!
+ * @discussion Upload contents to serve
+ */
+- (void)save {
+    [ZzishService saveUser:self];
+}
 
 + (ZzishUser *) currentUser {
     NSString* currentUserId = [ZZPropertyService userId];

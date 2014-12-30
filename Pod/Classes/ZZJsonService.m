@@ -17,11 +17,11 @@
     return JSON_FILE_NAME;
 }
 
-+ (NSString *)next {
++ (NSDictionary *)next {
     return [self saveRequest:nil andReturn:YES];
 }
 
-+ (NSString *)saveRequest:(NSString *)json andReturn:(BOOL)returnFirst {
++ (NSDictionary *)saveRequest:(NSDictionary *)json andReturn:(BOOL)returnFirst {
     NSMutableArray* data = [NSMutableArray new];
     [data addObjectsFromArray:[self data:JSON_DATA]];
     if (json) {
@@ -29,7 +29,7 @@
     }
     if (returnFirst) {
         if ([data count]>0) {
-            NSString* first = (NSString *)data[0];
+            NSDictionary* first = (NSDictionary *)data[0];
             [data removeObjectAtIndex:0];
             return first;
         }
@@ -41,7 +41,7 @@
 
 }
 
-+ (void)buffer:(NSString *)json {
++ (void)buffer:(NSDictionary *)json {
     NSMutableArray* data = [self data:JSON_DATA];
     if (!data) {
         data = [NSMutableArray new];
