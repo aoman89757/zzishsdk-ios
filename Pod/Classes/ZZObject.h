@@ -6,9 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSONModel.H"
+//#import "JSONModel.h"
 
-@interface ZZObject : JSONModel
+@interface ZZObject : NSObject
 
 @property (strong,nonatomic) NSString* uuid;
 

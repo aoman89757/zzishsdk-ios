@@ -14,17 +14,18 @@
 
 @implementation ZZDataService
 
-+ (void)save:(ZZObject *)model {
++ (NSString *)save:(ZZObject *)model {
     NSError* error;
     NSMutableDictionary* overall = [NSMutableDictionary new];
     overall[CLASS_NAME] = NSStringFromClass ([model class]);
-    overall[OBJECT_VALUE] = [model toDictionary];
+    //overall[OBJECT_VALUE] = [model toDictionary];
     NSData *jsonOutputData = [NSJSONSerialization dataWithJSONObject:overall
                                                              options:NSJSONWritingPrettyPrinted
                                                                error:&error];
     //set json string to body data
     NSString *jsonOutputString = [[NSString alloc] initWithData:jsonOutputData encoding:NSUTF8StringEncoding];
     [self setData:model.uuid withValue:jsonOutputString];
+    return jsonOutputString;
 }
 
 + (ZZObject *)get:(NSString *)uuid {

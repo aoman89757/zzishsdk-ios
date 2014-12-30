@@ -6,26 +6,26 @@
 //
 //
 
-#import "Zzish.h"
+#import "ZzishService.h"
 #import "ZZPropertyService.h"
 #import "ZZWebService.h"
 #import "ZzishSDK.h"
 #import "ZZJsonService.h"
 
-@interface Zzish()
+@interface ZzishService()
 
 @property (strong,nonatomic) ZZWebService* wservice;
 
 @end
 
-@implementation Zzish
+@implementation ZzishService
 
 @synthesize delegate;
 
-static Zzish *instance;
+static ZzishService *instance;
 static dispatch_once_t predicate = 0;
 
-+ (void)initWithApplicationId:(NSString *)applicationId {
++ (void)startWithApplicationId:(NSString *)applicationId {
     if (!instance) {
         predicate = 0;
         dispatch_once(&predicate, ^{
@@ -42,19 +42,19 @@ static dispatch_once_t predicate = 0;
     }
 }
 
-+ (ZZUser *)user:(NSString *)uuid {
++ (ZzishUser *)user:(NSString *)uuid {
     NSString* currentUserId = [ZZPropertyService userId];
     if (!currentUserId || ![uuid isEqualToString:currentUserId]) {
         //userId is new or changed
         [ZZPropertyService setSessionId:[[NSUUID UUID] UUIDString]];
     }
     [ZZPropertyService setUserId:uuid];
-    ZZUser* user = [[ZZUser alloc] init];
+    ZzishUser* user = [[ZzishUser alloc] init];
     user.uuid = uuid;
     return user;
 }
 
-+ (void)sendMessage:(ZZUser *)userModel withActivivity:(ZZActivity *)activityModel forVerb:(NSString *)verbName withAction:(ZZAction*)actionModel {
++ (void)sendMessage:(ZzishUser *)userModel withActivivity:(ZzishActivity *)activityModel forVerb:(NSString *)verbName withAction:(ZzishAction*)actionModel {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     dictionary[@"id"] = activityModel.uuid;
     dictionary[@"actor"] = [userModel tincan];
@@ -70,8 +70,8 @@ static dispatch_once_t predicate = 0;
     }
     NSMutableDictionary *context = [NSMutableDictionary new];
     NSMutableDictionary *extensions = [NSMutableDictionary new];
-    if (userModel.groupCode) {
-        extensions[@"http://www.zzish.com/context/extension/groupCode"]=userModel.groupCode;
+    if (activityModel.groupCode) {
+        extensions[@"http://www.zzish.com/context/extension/groupCode"]=activityModel.groupCode;
     }
     if ([ZZPropertyService deviceId]) {
         extensions[@"http://www.zzish.com/context/extension/deviceId"]=[ZZPropertyService deviceId];
@@ -82,6 +82,24 @@ static dispatch_once_t predicate = 0;
     context[@"extensions"] = extensions;
     dictionary[@"context"] = context;
 
+    [self uploadDictionary:dictionary toEndPoint:@"statements"];
+    
+    
+
+}
+
++ (void)saveUser:(ZzishUser*)user {
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+    dictionary[@"name"] = user.name;
+    dictionary[@"uuid"] = user.uuid;
+    [ZzishService uploadDictionary:dictionary toEndPoint:@"profiles"];
+}
+
++ (void)uploadDictionary:(NSDictionary *)dictionary toEndPoint:(NSString *)endpoint {
+    NSMutableDictionary* toPost = [NSMutableDictionary new];
+    toPost[ENDPOINT_PARAM] = endpoint;
+
+    
     NSError *error;
     NSData *jsonOutputData = [NSJSONSerialization dataWithJSONObject:dictionary
                                                              options:NSJSONWritingPrettyPrinted
@@ -90,16 +108,16 @@ static dispatch_once_t predicate = 0;
     
     //set json string to body data
     NSString *jsonOutputString = [[NSString alloc] initWithData:jsonOutputData encoding:NSUTF8StringEncoding];
-    
-    
+    toPost[DATA_PARAM] = jsonOutputString;
+
     if ([ZzishSDK connected]) {
-        NSString *firstToSend = [ZZJsonService saveRequest:jsonOutputString andReturn:YES];
+        NSDictionary *firstToSend = [ZZJsonService saveRequest:toPost andReturn:YES];
         NSLog(@"Connected Sending %@",firstToSend);
         //connected so we can send message
-        [instance.wservice upload:@"statements" withJSON:firstToSend];
+        [instance.wservice upload:firstToSend];
     }
     else {
-        [ZZJsonService saveRequest:jsonOutputString andReturn:NO];
+        [ZZJsonService saveRequest:toPost andReturn:NO];
     }
 }
 
@@ -111,9 +129,9 @@ static dispatch_once_t predicate = 0;
     NSLog(@"Processing Response %@",dictionary);
     int status = [dictionary[@"status"] intValue];
     //check to see if there are any other messages to send. If there are not, finish
-    NSString* jsonString = [ZZJsonService next];
-    if (jsonString) {
-        [instance.wservice upload:@"statements" withJSON:jsonString];
+    NSDictionary *next = [ZZJsonService next];
+    if (next) {
+        [instance.wservice upload:next];
     }
     else {
         NSString* message = @"";

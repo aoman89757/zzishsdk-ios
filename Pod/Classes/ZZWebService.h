@@ -22,7 +22,7 @@
 
 @property (retain) id delegate;
 
-- (void)upload:(NSString *)endpoint withJSON:(NSString*)json;
+- (void)upload:(NSDictionary*)command;
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;

@@ -31,7 +31,7 @@
 }
 
 + (void)setUserId:(NSString *)userId {
-    [self setData:SESSION_ID withValue:userId];
+    [self setData:USER_ID withValue:userId];
 }
 
 + (NSString *)userId {

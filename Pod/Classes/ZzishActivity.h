@@ -8,13 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import "ZZObject.h"
-#import "ZZAction.h"
-@class ZZUser;
+#import "ZzishAction.h"
+@class ZzishUser;
 
-@interface ZZActivity : ZZObject
+@interface ZzishActivity : ZZObject
 
+/*!
+ * @discussion The name of the activity
+ */
 @property (strong, nonatomic) NSString* name;
-@property (strong, nonatomic) ZZUser* user;
+/*!
+ * @discussion The Zzish Class Code for the activity
+ */
+@property (strong, nonatomic) NSString* groupCode;
+/*!
+ * @discussion The user that created this activity
+ */
+@property (strong, nonatomic) ZzishUser* user;
 
 /*!
  * @discussion Start the activity
@@ -35,7 +45,7 @@
  * @discussion Create an action for this activity
  * @param name The name of the action
  */
-- (ZZAction *)createAction:(NSString *)name;
+- (ZzishAction *)createAction:(NSString *)name;
 
 /*!
  * @discussion Returns the actor portion of a tincan statement

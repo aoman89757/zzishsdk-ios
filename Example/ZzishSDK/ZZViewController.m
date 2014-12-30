@@ -43,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [Zzish initWithApplicationId:@"868b8768-c031-434c-b4f6-69e8f39dd5bf"];
+    [Zzish startWithApplicationId:@"YOUR_APP_ID"];
     [Zzish delegate:self];
 }
 
@@ -55,12 +55,12 @@
 - (IBAction)createUser:(id)sender {
     self.user = [Zzish user:self.userId.text];
     self.user.name = self.name.text;
-    self.user.groupCode = self.groupCode.text;
     NSLog(@"Created user");
 }
 
 - (IBAction)createActivity:(id)sender {
     self.activity = [self.user createActivity:self.activityName.text];
+    self.activity.groupCode = self.groupCode.text;
     [self.activity start];
     NSLog(@"Started Activity");
 }

@@ -6,26 +6,26 @@
 //
 //
 
-#import "ZZActivity.h"
-#import "ZZUser.h"
-#import "Zzish.h"
+#import "ZzishActivity.h"
+#import "ZzishUser.h"
+#import "ZzishService.h"
 
-@implementation ZZActivity
+@implementation ZzishActivity
 
 - (void)start {
-    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:nil];
+    [ZzishService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:nil];
 }
 
 - (void)stop {
-    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/complete" withAction:nil];
+    [ZzishService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/complete" withAction:nil];
 }
 
 - (void)cancel {
-    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/cancel" withAction:nil];
+    [ZzishService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/cancel" withAction:nil];
 }
 
-- (ZZAction *)createAction:(NSString *)name {
-    ZZAction* action = [[ZZAction alloc] init];
+- (ZzishAction *)createAction:(NSString *)name {
+    ZzishAction* action = [[ZzishAction alloc] init];
     action.name = name;
     action.uuid = [[NSUUID UUID] UUIDString];
     action.activity = self;
