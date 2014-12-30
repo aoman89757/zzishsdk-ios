@@ -15,7 +15,7 @@
 /*!
  * @discussion The activity that created the action
  */
-@property (strong,readonly) ZzishActivity* activity;
+@property (strong,nonatomic) ZzishActivity* activity;
 /*!
  * @discussion The name of the action (e.g question)
  */
