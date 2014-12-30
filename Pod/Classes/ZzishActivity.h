@@ -13,8 +13,17 @@
 
 @interface ZzishActivity : ZZObject
 
+/*!
+ * @discussion The name of the activity
+ */
 @property (strong, nonatomic) NSString* name;
+/*!
+ * @discussion The Zzish Class Code for the activity
+ */
 @property (strong, nonatomic) NSString* groupCode;
+/*!
+ * @discussion The user that created this activity
+ */
 @property (strong, nonatomic) ZzishUser* user;
 
 /*!

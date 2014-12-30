@@ -12,20 +12,37 @@
 
 @interface ZzishAction : ZZObject
 
-@property (strong,nonatomic) ZzishActivity* activity;
+/*!
+ * @discussion The activity that created the action
+ */
+@property (strong,readonly) ZzishActivity* activity;
+/*!
+ * @discussion The name of the action (e.g question)
+ */
 @property (strong,nonatomic) NSString* name;
+/*!
+ * @discussion The response for the aciton
+ */
 @property (strong,nonatomic) NSString* response;
 
-/// A score assigned to this action, this will be incorporated into the total score for the activity.
+/*!
+ * @discussion A score assigned to this action, this will be incorporated into the total score for the activity.
+ */
 @property (nonatomic) float score;
 
-/// The duration it took for the user to complete the action. Measured in milliseconds.
+/*!
+ * @discussion The duration it took for the user to complete the action. Measured in milliseconds.
+ */
 @property (nonatomic) long duration;
 
-/// Whether this action was correct.
+/*!
+ * @discussion Whether this action was correct.
+ */
 @property (nonatomic) BOOL correct;
 
-/// The number of tries the user had.
+/*!
+ * @discussion The number of attempts the user had.
+ */
 @property (nonatomic) int attempts;
 
 

@@ -12,6 +12,9 @@
 
 @interface ZzishUser : ZZObject
 
+/*!
+ * @discussion The name of the user
+ */
 @property (strong, nonatomic) NSString* name;
 
 /*!
