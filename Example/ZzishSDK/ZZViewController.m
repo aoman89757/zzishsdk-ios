@@ -43,8 +43,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [Zzish startWithApplicationId:@"YOUR_APP_ID"];
-    [Zzish delegate:self];
+    [Zzish startWithApplicationId:@"YOUR_APP_ID" withBlock:^(NSDictionary *response) {
+        NSLog(@"Response after initialising %@",response);
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +62,9 @@
 - (IBAction)createActivity:(id)sender {
     self.activity = [self.user createActivity:self.activityName.text];
     self.activity.groupCode = self.groupCode.text;
-    [self.activity start];
+    [self.activity startWithBlock:^(NSDictionary *response) {
+        NSLog(@"Response after starting %@",response);
+    }];
     NSLog(@"Started Activity");
 }
 
@@ -85,16 +88,22 @@
         [self.action correct:[self.correct.text boolValue]];
     }
     self.action.response = self.response.text;
-    [self.action save];
+    [self.action saveWithBlock:^(NSDictionary *response) {
+        NSLog(@"Saved action with result %@",response);
+    }];
 }
 
 - (IBAction)stopActivity:(id)sender {
     //saves the attributes
-    [self.activity stop];
+    [self.activity stopWithBlock:^(NSDictionary *response) {
+        NSLog(@"Response after stopping %@",response);
+    }];
 }
 
 - (IBAction)cancelActivity:(id)sender {
-    [self.activity cancel];
+    [self.activity cancelWithBlock:^(NSDictionary *response) {
+        NSLog(@"Response after cancelling %@",response);
+    }];
 }
 
 - (void)processZzishResponse:(int)status andMessage:(NSString *)message {

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <ZzishSDK/ZzishSDK.h>
 
-@interface ZZViewController : UIViewController <ZZCallbackDelegate>
+@interface ZZViewController : UIViewController
 
 @end
