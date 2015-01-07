@@ -26,6 +26,8 @@ typedef void(^MyCustomBlockType)(NSDictionary* response);
 
 @implementation ZZWebService
 
+@synthesize block;
+
 - (void)upload:(NSDictionary*)command withBlock: (void (^) (NSDictionary *response)) mblock {
     self.block = mblock;
     NSString* endpoint = command[ENDPOINT_PARAM];
