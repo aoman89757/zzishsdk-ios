@@ -9,8 +9,8 @@
 // Calabash
 #define COCOAPODS_POD_AVAILABLE_Calabash
 #define COCOAPODS_VERSION_MAJOR_Calabash 0
-#define COCOAPODS_VERSION_MINOR_Calabash 11
-#define COCOAPODS_VERSION_PATCH_Calabash 4
+#define COCOAPODS_VERSION_MINOR_Calabash 12
+#define COCOAPODS_VERSION_PATCH_Calabash 0
 
 // JSONModel
 #define COCOAPODS_POD_AVAILABLE_JSONModel

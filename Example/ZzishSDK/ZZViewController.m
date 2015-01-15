@@ -56,7 +56,9 @@
 - (IBAction)createUser:(id)sender {
     self.user = [Zzish user:self.userId.text];
     self.user.name = self.name.text;
-    NSLog(@"Created user");
+    [self.user saveWithBlock:^(NSDictionary *response) {
+        NSLog(@"Created user with response %@",response);
+    }];
 }
 
 - (IBAction)createActivity:(id)sender {

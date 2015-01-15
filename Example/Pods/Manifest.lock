@@ -1,8 +1,8 @@
 PODS:
-  - Calabash (0.11.4)
+  - Calabash (0.12.0)
   - JSONModel (1.0.1)
   - Reachability (3.2)
-  - ZzishSDK (0.3.1):
+  - ZzishSDK (0.3.2):
     - JSONModel (= 1.0.1)
     - Reachability (= 3.2.0)
 
@@ -17,9 +17,9 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Calabash: 9109be60e14cf2718438a58f49fa1e1a7550171f
+  Calabash: 6d062673d364c675806c6c67cfe881308a15d2a8
   JSONModel: 634100aaacbd89811bc8a03da209356e5989c569
   Reachability: 1ef8adf5c4e3d362f96515d4278f68dad3c26930
-  ZzishSDK: bd14ea243a44cfba4311472dbdec741563129b0a
+  ZzishSDK: d0d05ae9da5d052d9fbec89f92f502e33d958866
 
 COCOAPODS: 0.35.0
