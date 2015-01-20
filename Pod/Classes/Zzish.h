@@ -14,10 +14,43 @@
 
 @interface Zzish : NSObject
 
-+ (void)startWithApplicationId:(NSString *)applicationId withBlock: (void (^) (NSDictionary *response)) block;
+/*!
+ * @discussion initializes the Zzish SDK
+ * @param apiKey The API Key received from creating an app on the Zzish developer console
+ */
++ (void)startWithApplicationId:(NSString *)apiKey;
+
+/*!
+ * @discussion initializes the Zzish SDK
+ * @param apiKey The API Key received from creating an app on the Zzish developer console
+ * @param block A block to process the response from initialising
+ */
++ (void)startWithApplicationId:(NSString *)apiKey withBlock: (void (^) (NSDictionary *response)) block;
+
+/*!
+ * @discussion Creates a ZZUser object
+ * @param user A unique userId (e.g. from another login system)
+ */
 + (ZZUser *)user:(NSString *)user;
+
+/*!
+ * @discussion Saves a ZZUser object
+ * @param user The ZZUser to save
+ */
++ (void)saveUser:(ZZUser*)user;
+
+/*!
+ * @discussion Saves a ZZUser object
+ * @param user The ZZUser to save
+ * @param block the block to process the response.
+ */
 + (void)saveUser:(ZZUser*)user withBlock: (void (^) (NSDictionary *response)) block;
-+ (void)sendMessage:(ZZUser *)user withActivivity:(ZZActivity *)activity forVerb:(NSString *)verbName withAction:(ZZAction*)action withBlock: (void (^) (NSDictionary *response)) block;
+
+
+
+/*!
+ * @discussion Returns true if it can connect to internet
+ */
 + (BOOL)connected;
 
 @end

@@ -8,20 +8,32 @@
 
 #import "ZZActivity.h"
 #import "ZZUser.h"
-#import "Zzish.h"
+#import "ZZTincanService.h"
 
 @implementation ZZActivity
 
+- (void)start {
+    [self startWithBlock:nil];
+}
+
 - (void)startWithBlock: (void (^) (NSDictionary *response)) block {
-    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:nil withBlock:block];
+    [ZZTincanService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:nil withBlock:block];
+}
+
+- (void)stop {
+    [self stopWithBlock:nil];
 }
 
 - (void)stopWithBlock: (void (^) (NSDictionary *response)) block {
-    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/complete" withAction:nil withBlock:block];
+    [ZZTincanService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/complete" withAction:nil withBlock:block];
+}
+
+- (void)cancel {
+    [self cancelWithBlock:nil];
 }
 
 - (void)cancelWithBlock: (void (^) (NSDictionary *response)) block {
-    [Zzish sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/cancel" withAction:nil withBlock:block];
+    [ZZTincanService sendMessage:self.user withActivivity:self forVerb:@"http://activitystrea.ms/schema/1.0/cancel" withAction:nil withBlock:block];
 }
 
 - (ZZAction *)createAction:(NSString *)name {

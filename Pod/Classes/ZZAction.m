@@ -8,7 +8,7 @@
 
 #import "ZZAction.h"
 #import "ZZActivity.h"
-#import "Zzish.h"
+#import "ZZTincanService.h"
 
 @interface ZZAction()
 
@@ -78,8 +78,12 @@
     return [self.correctObject boolValue];
 }
 
+- (void)save {
+    [self saveWithBlock:nil];
+}
+
 - (void)saveWithBlock: (void (^) (NSDictionary *response)) block {
-    [Zzish sendMessage:self.activity.user withActivivity:self.activity forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:self withBlock:block];
+    [ZZTincanService sendMessage:self.activity.user withActivivity:self.activity forVerb:@"http://activitystrea.ms/schema/1.0/start" withAction:self withBlock:block];
 }
 
 - (NSDictionary *)tincan {

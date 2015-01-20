@@ -32,6 +32,10 @@
  */
 - (NSDictionary *)attributes;
 
+/*!
+ * @discussion saves the ZZobject. Updates it if already exists. Uploads to server if connected
+ */
+- (void)save;
 
 /*!
  * @discussion saves the ZZobject. Updates it if already exists. Uploads to server if connected
