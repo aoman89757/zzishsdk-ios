@@ -43,7 +43,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [Zzish startWithApplicationId:@"YOUR_APP_ID" withBlock:^(NSDictionary *response) {
+    //*********************
+    //YOU MUST SET THE API KEY (WHICH YOU GET AFTER REGISTERING WITH THE DEVELOPER CONSOLE AT HTTP://DEVELOPER.ZZISH.COM)
+    //*********************     
+    [Zzish startWithApplicationId:@"YOUR API KEY" withBlock:^(NSDictionary *response) {
         NSLog(@"Response after initialising %@",response);
     }];
 }

@@ -77,7 +77,9 @@ typedef void(^MyCustomBlockType)(NSDictionary* response);
     // You can parse the stuff in your instance variable now
     NSError *e;
     NSDictionary *object = [NSJSONSerialization JSONObjectWithData:_responseData options:kNilOptions error:&e];
-    self.block(object);
+    if (self.block) {
+        self.block(object);
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
