@@ -11,7 +11,7 @@
 #import "ZZJsonService.h"
 
 
-#define BASE_URL @"http://api.zzish.co.uk/api/"
+#define BASE_URL @"https://api.zzish.com/NSString"
 
 typedef void(^MyCustomBlockType)(NSDictionary* response);
 
@@ -45,7 +45,7 @@ typedef void(^MyCustomBlockType)(NSDictionary* response);
     // This is how we set header fields
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     NSString* token = [ZZPropertyService appToken];
-    [request addValue:token forHTTPHeaderField:@"X-ApplicationId"];
+    [request addValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
     
     // Convert your data and set your request's HTTPBody property
     NSString *stringData = json;
