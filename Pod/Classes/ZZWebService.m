@@ -11,7 +11,7 @@
 #import "ZZJsonService.h"
 
 
-#define BASE_URL @"https://api.zzish.com/NSString"
+#define BASE_URL @"https://api.zzish.com/"
 
 typedef void(^MyCustomBlockType)(NSDictionary* response);
 
