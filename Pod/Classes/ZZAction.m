@@ -16,6 +16,7 @@
 @property (strong,nonatomic) NSNumber* durationObject;
 @property (nonatomic,nonatomic) NSNumber* correctObject;
 @property (nonatomic,nonatomic) NSNumber* attemptsObject;
+@property (nonatomic,nonatomic) NSNumber* proficiencyObject;
 
 @end
 
@@ -46,6 +47,11 @@
     return self;
 }
 
+- (ZZAction *)proficiency:(int)proficiency {
+    self.proficiencyObject = [NSNumber numberWithInt:proficiency];
+    return self;
+}
+
 - (void)setScore:(float)score {
     [self score:score];
 }
@@ -60,6 +66,10 @@
 
 - (void)setCorrect:(BOOL)correct {
     [self correct:correct];
+}
+
+- (void)setProficiency:(int)proficiency {
+    [self proficiency:proficiency];
 }
 
 - (float)score {
@@ -77,6 +87,11 @@
 - (BOOL)correct {
     return [self.correctObject boolValue];
 }
+
+- (int)proficiency {
+    return [self.proficiencyObject intValue];
+}
+
 
 - (void)save {
     [self saveWithBlock:nil];
@@ -101,10 +116,17 @@
     actionDefinition[@"type"] = self.name;
     action[@"definition"] = actionDefinition;
     action[@"uuid"] = self.uuid;
-    
+    BOOL haveState = false;
+    NSMutableDictionary *actionState = [NSMutableDictionary new];
     if ([self.attributes count]>0) {
-        NSMutableDictionary *actionState = [NSMutableDictionary new];
+        haveState = true;
         actionState[@"attributes" ]= self.attributes;
+    }
+    if(self.proficiencyObject) {
+        haveState = true;
+        actionState[@"proficiency"] = self.proficiencyObject;
+    }
+    if (haveState) {
         action[@"state"] = actionState;
     }
     return action;
