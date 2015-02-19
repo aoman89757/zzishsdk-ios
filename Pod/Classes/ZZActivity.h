@@ -22,6 +22,10 @@
  */
 @property (strong, nonatomic) NSString* groupCode;
 /*!
+ * @discussion The proficiency for this activity (saved when completed)
+ */
+@property (nonatomic) int proficiency;
+/*!
  * @discussion The user that created this activity
  */
 @property (strong, nonatomic) ZZUser* user;
@@ -70,5 +74,11 @@
  * @discussion Returns the actor portion of a tincan statement
  */
 - (NSDictionary *)tincan;
+
+/*!
+ * @discussion Set the proficiency for this activity
+ * @param the proficiency for the activity
+ */
+- (ZZActivity *)proficiency:(int)proficiency;
 
 @end

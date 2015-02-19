@@ -45,6 +45,11 @@
  */
 @property (nonatomic) int attempts;
 
+/*!
+ * @discussion The proficiency for this action
+ */
+@property (nonatomic) int proficiency;
+
 
 /*!
  * @discussion Set the score of the action
@@ -69,6 +74,13 @@
  * @param attempts the number of attempts for this action
  */
 - (ZZAction *)attempts:(int)attempts;
+
+/*!
+ * @discussion Set the proficiency for this action
+ * @param the proficiency for the action
+ */
+- (ZZAction *)proficiency:(int)proficiency;
+
 
 /*!
  * @discussion Returns the actor portion of a tincan statement
