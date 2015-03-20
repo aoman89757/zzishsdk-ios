@@ -12,6 +12,12 @@
 
 @implementation ZZTincanService
 
++ (void)validateClassCode:(NSString *)code withBlock: (void (^) (NSDictionary *response)) block {
+    NSString* url = [NSString stringWithFormat:@"statements/groups/validate/%@",code];
+    ZZWebService* wservice = [[ZZWebService alloc] init];
+    [wservice get:url withBlock:block];
+}
+
 + (void)sendMessage:(ZZUser *)userModel withActivivity:(ZZActivity *)activityModel forVerb:(NSString *)verbName withAction:(ZZAction*)actionModel  withBlock: (void (^) (NSDictionary *response)) block {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     dictionary[@"id"] = activityModel.uuid;

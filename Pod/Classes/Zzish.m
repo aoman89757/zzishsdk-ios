@@ -51,6 +51,34 @@ static dispatch_once_t predicate = 0;
     }
 }
 
+
++ (void)validateClassCode:(NSString *)code {
+    [Zzish validateClassCode:code withBlock:nil];
+}
+
++ (void)validateClassCode:(NSString *)code withBlock: (void (^) (NSDictionary *response)) block  {
+    NSMutableDictionary *result = [NSMutableDictionary new];
+    if ([code length]>1) {
+        int lastChar = [[code substringWithRange:NSMakeRange([code length]-1, 1)] intValue];
+        int total = 0;
+        for (int counter=0;counter<[code length]-1;counter++) {
+            total+= [code characterAtIndex:counter];
+        }
+        total = total%10;
+        if (lastChar==total) {
+            if (block) {
+                [ZZTincanService validateClassCode:code withBlock:block];
+            }
+        }
+    }
+    if (block) {
+        result[@"status"] = [NSNumber numberWithInt:400];
+        result[@"message"] = @"Invalid Class Code";
+        block(result);
+    }
+}
+
+
 + (ZZUser *)user:(NSString *)uuid {
     if (!uuid) uuid = [[NSUUID UUID] UUIDString];
     NSString* currentUserId = [ZZPropertyService userId];

@@ -45,8 +45,9 @@
     [super viewDidLoad];
     //*********************
     //YOU MUST SET THE API KEY (WHICH YOU GET AFTER REGISTERING WITH THE DEVELOPER CONSOLE AT HTTP://DEVELOPER.ZZISH.COM)
-    //*********************     
-    [Zzish startWithApplicationId:@"YOUR API KEY" withBlock:^(NSDictionary *response) {
+    //*********************
+    [Zzish startWithApplicationId:@"YOUR_API_KEY" withBlock:^(NSDictionary *
+                                                              response) {
         NSLog(@"Response after initialising %@",response);
     }];
 }
@@ -66,11 +67,15 @@
 
 - (IBAction)createActivity:(id)sender {
     self.activity = [self.user createActivity:self.activityName.text];
-    self.activity.groupCode = self.groupCode.text;
-    [self.activity startWithBlock:^(NSDictionary *response) {
-        NSLog(@"Response after starting %@",response);
+    [Zzish validateClassCode:self.groupCode.text withBlock:^(NSDictionary *response) {
+        NSLog(@"Result is %@",response);
+        self.activity.groupCode = self.groupCode.text;
+        [self.activity startWithBlock:^(NSDictionary *response) {
+            NSLog(@"Response after starting %@",response);
+        }];
+        NSLog(@"Started Activity");
     }];
-    NSLog(@"Started Activity");
+    
 }
 
 - (IBAction)createAction:(id)sender {

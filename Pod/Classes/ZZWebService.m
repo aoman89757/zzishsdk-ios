@@ -28,6 +28,11 @@ typedef void(^MyCustomBlockType)(NSDictionary* response);
 
 @synthesize block;
 
+- (void)get:(NSString*)url withBlock: (void (^) (NSDictionary *response)) mblock {
+    self.block = mblock;
+    [self upload:url withJSON:nil];
+}
+
 - (void)upload:(NSDictionary*)command withBlock: (void (^) (NSDictionary *response)) mblock {
     self.block = mblock;
     NSString* endpoint = command[ENDPOINT_PARAM];
@@ -40,17 +45,25 @@ typedef void(^MyCustomBlockType)(NSDictionary* response);
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL,endpoint]]];
     
     // Specify that it will be a POST request
-    request.HTTPMethod = @"POST";
+    if (json) {
+        request.HTTPMethod = @"POST";
+    }
+    else {
+        request.HTTPMethod = @"GET";
+    }
     
     // This is how we set header fields
     [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     NSString* token = [ZZPropertyService appToken];
     [request addValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+//        [request addValue:[NSString stringWithFormat:@"%@",token] forHTTPHeaderField:@"X-ApplicationId"];
     
     // Convert your data and set your request's HTTPBody property
-    NSString *stringData = json;
-    NSData *requestBodyData = [stringData dataUsingEncoding:NSUTF8StringEncoding];
-    request.HTTPBody = requestBodyData;
+    if (json) {
+        NSString *stringData = json;
+        NSData *requestBodyData = [stringData dataUsingEncoding:NSUTF8StringEncoding];
+        request.HTTPBody = requestBodyData;
+    }
     
     // Create url connection and fire request
     NSURLConnection* conn = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];

@@ -43,4 +43,11 @@
  */
 - (void)saveWithBlock: (void (^) (NSDictionary *response)) block;
 
+/*!
+ * @discussion returns attributeHashMap as one string
+ */
+- (NSString *)attributesAsString;
+
+ 
+
 @end

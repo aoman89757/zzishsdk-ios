@@ -11,6 +11,8 @@
 
 @interface ZZWebService : NSObject<NSURLConnectionDelegate>
 
+- (void)get:(NSString*)url withBlock: (void (^) (NSDictionary *response)) mblock;
+
 - (void)upload:(NSDictionary*)command withBlock: (void (^) (NSDictionary *response)) block;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;

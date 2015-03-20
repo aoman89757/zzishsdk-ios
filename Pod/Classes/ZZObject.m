@@ -45,4 +45,20 @@
     [ZZDataService save:self];
 }
 
+/*!
+ * @discussion returns attributeHashMap as one string
+ */
+- (NSString *)attributesAsString {
+    NSString* result;
+    for(id key in self.attributes) {
+        NSString* value = [NSString stringWithFormat:@"%@===%@",key,self.attributes[key]];
+        result = [NSString stringWithFormat:@"%@---%@",value,result];
+    }
+    if ([result length]>3) {
+        return [result substringWithRange:NSMakeRange(0, [result length]-3)];
+    }
+    return result;
+}
+
+
 @end

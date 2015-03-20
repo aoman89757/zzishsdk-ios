@@ -27,6 +27,22 @@
  */
 + (void)startWithApplicationId:(NSString *)apiKey withBlock: (void (^) (NSDictionary *response)) block;
 
+
+/*!
+ * @discussion initializes the Zzish SDK
+ * @param code A Zzish class code
+ * @param block A block to process the response from initialising
+ */
++ (void)validateClassCode:(NSString *)code;
+
+/*!
+ * @discussion initializes the Zzish SDK
+ * @param code A Zzish class code
+ * @param block A block to process the response from initialising
+ */
++ (void)validateClassCode:(NSString *)code withBlock: (void (^) (NSDictionary *response)) block;
+
+
 /*!
  * @discussion Creates a ZZUser object
  * @param user A unique userId (e.g. from another login system)
