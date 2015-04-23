@@ -6,4 +6,4 @@
 //  Copyright (c) 2014 Samir Seetal. All rights reserved.
 //
 
-${TEST_EXAMPLE}
+

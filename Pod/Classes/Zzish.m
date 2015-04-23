@@ -70,11 +70,20 @@ static dispatch_once_t predicate = 0;
                 [ZZTincanService validateClassCode:code withBlock:block];
             }
         }
+        else {
+            if (block) {
+                result[@"status"] = [NSNumber numberWithInt:400];
+                result[@"message"] = @"Invalid Class Code";
+                block(result);
+            }            
+        }
     }
-    if (block) {
-        result[@"status"] = [NSNumber numberWithInt:400];
-        result[@"message"] = @"Invalid Class Code";
-        block(result);
+    else {
+        if (block) {
+            result[@"status"] = [NSNumber numberWithInt:400];
+            result[@"message"] = @"Invalid Class Code";
+            block(result);
+        }        
     }
 }
 

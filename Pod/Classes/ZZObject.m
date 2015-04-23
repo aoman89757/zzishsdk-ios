@@ -45,6 +45,10 @@
     [ZZDataService save:self];
 }
 
+- (void)save {
+    
+}
+
 /*!
  * @discussion returns attributeHashMap as one string
  */
